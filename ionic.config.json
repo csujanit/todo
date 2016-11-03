@@ -1,0 +1,13 @@
+{
+  "name": "todo",
+  "app_id": "com.raisapp.rais",
+  "gulpStartupTasks": [
+    "sass"
+  ],
+  "proxies": [
+    {
+      "path": "/login",
+       "proxyUrl": "http://127.0.0.1:8780/login"
+     }]
+}
+
