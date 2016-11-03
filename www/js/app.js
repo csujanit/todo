@@ -44,15 +44,55 @@ raisapp.run(function($http){
   })
 */
 
+raisapp.factory('User',function(){
+ users = {};
+ users.appt_id = '';
+ return users;
+});
+
 raisapp.config(['$httpProvider', function($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         delete $httpProvider.defaults.headers.common['X-Requested-With'];
     }
 ]);
 
+raisapp.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
+   $urlRouterProvider.otherwise('/home')
+   $stateProvider
+   .state('home',{
+    url: '/home',
+    templateUrl: 'templates/sign-in.html',
+    controller:'homeCtrl'
+   })
+   .state('somestate',{
+      url:'/somestate',
+      template:'<p>testing here</p>'
+   })
+   .state('userverify',{
+     url:'/userverify',
+     templateUrl:'templates/login.html',
+     controller:'homeCtrl1'
+   })
+
+  }
+ ]);
+
+raisapp.controller('homeCtrl',function($scope,$http,$state,User){
+    $scope.user = User;
+   $scope.changeAction = function(first){
+    $state.go('userverify')
+   }
+ }
+);
+
+raisapp.controller('homeCtrl1',function($scope,$http,$state,User){
+   $scope.user = User;
+   }
+);
+
 raisapp.controller('someCtrl',function($scope,$http){
 		  $scope.retreive_app_data = function(){
-		  $scope.logindata = "sample  "
+		  $scope.logindata = "sample"
 		  delete $http.defaults.headers.common['X-Requested-With'];
 
 		    $http({

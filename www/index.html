@@ -7,26 +7,9 @@
 
     <link rel="manifest" href="manifest.json">
 
-    <!-- un-comment this code to enable service worker
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('service-worker.js')
-          .then(() => console.log('service worker installed'))
-          .catch(err => console.log('Error', err));
-      }
-    </script>-->
-
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
-    <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
     <!-- your app's js -->
@@ -34,16 +17,43 @@
   </head>
   <body ng-app="raisapp" ng-controller="someCtrl">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">RAIS APP</h1>
-      </ion-header-bar>
-      <ion-content>
-        <form ng-submit="retreive_app_data()">
-          <input class="button button-block button-positive" type="submit" name="submit" value="Submit to server">
-        </form>
-        {{app_data}}
-      </ion-content>
-    </ion-pane>
+        <ion-header-bar class="bar-positive">
+          <h1 class="title">RAIS APP</h1>
+        </ion-header-bar>
+        <ion-nav-view></ion-nav-view>
+
+        <script id="templates/sign-in.html" type="text/ng-template">
+        <ion-view view-title="Appartment-Search">
+          <ion-content>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <span class="input-label label-set">Rais ID</span>
+                <input type="text" ng-model="user.appt_id" placeholder="Enter Appartment ID">
+              </label>
+              <button class="button button-block button-outline button-positive " ng-click="changeAction(first)">Search</button>
+            </div>
+          </ion-content>
+        </ion-view>
+        </script>
+
+
+
+        <script id="templates/login.html" type="text/ng-template">
+          <ion-view view-title="Member-Search">
+          <ion-content>
+            <h1>{{first.user.appt_id}}</h1>
+            <div class="list list-inset">
+              <label class="item item-input">
+                <span class="input-label label-set">Rais ID</span>{{user.appt_id}}
+              </label>
+              <label class="item item-input">
+                <span class="input-label label-set">Mobile No</span>
+                <input type="text" ng-model="user.mobile_number" placeholder="Registered Mobile Number">
+              </label>
+              <button class="button button-block button-outline button-positive " ng-click="changeAction()">Search</button>
+            </div>
+          </ion-content>
+          </ion-view>
+        </script>
   </body>
 </html>
